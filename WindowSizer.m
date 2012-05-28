@@ -1,24 +1,30 @@
 /*
-ShiftIt: Resize windows with Hotkeys
-Copyright (C) 2010  Aravind
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ ShiftIt: Resize windows with Hotkeys
+ Copyright (C) 2010  Aravind
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ */
 
 #import "WindowSizer.h"
 #import <Carbon/Carbon.h>
+
+@interface WindowSizer ()
+
+- (void)resizeWindowToCursorLocation:(NSTimer *)timer;
+
+@end
 
 @implementation WindowSizer
 
@@ -78,7 +84,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             }
         }
     }
-
+	
     
 }
 
@@ -103,7 +109,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     error = TRUE;
                 }                
             }
-
+			
 			if(AXUIElementCopyAttributeValue((AXUIElementRef)_focusedWindow,(CFStringRef)NSAccessibilitySizeAttribute,(CFTypeRef*)&_size) != kAXErrorSuccess) {
 				NSLog(@"Can't Retrieve Window Size");
                 error = TRUE;
@@ -129,10 +135,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     return !error;
 }
 
--(IBAction)shiftToCursorLocation:(id)sender{
-    NSLog(@"-- Shifting to Cursor Location");
+- (void)resizeWindowToCursorLocation:(NSTimer *)timer {
+	NSLog(@"hello");
 	if([self getWindowParameters]){
-        [self getVisibleScreenParams];
+		[self getVisibleScreenParams];
 		
 		// get mouse coordinates
 		NSPoint mouseLocation;
@@ -149,8 +155,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		if(AXUIElementSetAttributeValue((AXUIElementRef)_focusedWindow,(CFStringRef)NSAccessibilitySizeAttribute,(CFTypeRef*)_size) != kAXErrorSuccess){
 			NSLog(@"Size cannot be modified");
 		}
-    }
-    _focusedWindow = NULL;
+	}
+	_focusedWindow = NULL;
+}
+
+-(IBAction)shiftToCursorLocation:(id)sender{
+    NSLog(@"-- Shifting to Cursor Location");
+	static BOOL cursorModeFlag = NO;
+	static NSTimer *resizeTimer = nil;
+	
+	const NSTimeInterval ResizeUpdateTimeInterval = 0.1;
+	
+	cursorModeFlag = !cursorModeFlag;
+	
+	if (cursorModeFlag) {
+		[self resizeWindowToCursorLocation:nil];	// call it once first to update immediately
+		
+		if (resizeTimer == nil) {
+			resizeTimer = [NSTimer scheduledTimerWithTimeInterval:ResizeUpdateTimeInterval
+												  target:self
+												selector:@selector(resizeWindowToCursorLocation:)
+												userInfo:nil
+												 repeats:YES];
+		}
+	} else {
+		[resizeTimer invalidate];
+		resizeTimer = nil;
+	}
 }
 
 -(IBAction)shiftToLeftHalf:(id)sender{
@@ -168,7 +199,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         _windowSize.height = _screenVisibleSize.height;
         _size = (CFTypeRef)(AXValueCreate(kAXValueCGSizeType, (const void *)&_windowSize));					
         NSLog(@"size2 width:%f, height:%f", _windowSize.width, _windowSize.height);
-
+		
 		if(AXUIElementSetAttributeValue((AXUIElementRef)_focusedWindow,(CFStringRef)NSAccessibilityPositionAttribute,(CFTypeRef*)_position) != kAXErrorSuccess){
 			NSLog(@"Position cannot be changed");
 		}

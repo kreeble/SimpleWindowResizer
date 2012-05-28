@@ -141,7 +141,7 @@ OSStatus winSizer(EventHandlerCallRef nextHandler,EventRef theEvent,void *userDa
     [_userDefaultsValuesDict setObject:center forKey:@"center"];
 	
 	NSDictionary *cursor = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSShiftKeyMask)], HotKeyModifers,
+							[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)], HotKeyModifers,
 							[NSNumber numberWithUnsignedInt:7], HotKeyCodes,
 							nil];
     [_userDefaultsValuesDict setObject:cursor forKey:@"cursor"];
@@ -156,7 +156,7 @@ OSStatus winSizer(EventHandlerCallRef nextHandler,EventRef theEvent,void *userDa
 	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:8 keyCode:124 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask+NSControlKeyMask)]]];
 	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:9 keyCode:8 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)]]];
 	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:10 keyCode:3 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)]]];
-	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:11 keyCode:7 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSShiftKeyMask)]]];
+	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:11 keyCode:7 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)]]];
 	
     [_userDefaultsValuesDict setObject:[NSNumber numberWithBool:YES] forKey:@"shiftItstartLogin"];
     [_userDefaultsValuesDict setObject:[NSNumber numberWithBool:YES] forKey:@"shiftItshowMenu"];
