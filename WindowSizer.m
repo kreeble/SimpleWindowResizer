@@ -129,6 +129,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     return !error;
 }
 
+-(IBAction)shiftToCursorLocation:(id)sender{
+    NSLog(@"-- Shifting to Cursor Location");
+	if([self getWindowParameters]){
+        [self getVisibleScreenParams];
+		
+		// get mouse coordinates
+		NSPoint mouseLocation;
+		mouseLocation = [NSEvent mouseLocation]; //get current mouse position
+		
+		CFTypeRef _size;
+		
+		NSLog(@"Mouse location: (%f, %f)", mouseLocation.x, mouseLocation.y);
+		NSLog(@"Screen size (%f, %f)", _screenSize.width, _screenSize.height);
+		_windowSize.width = mouseLocation.x - _windowPosition.x;
+		_windowSize.height = (_screenSize.height - mouseLocation.y) - _windowPosition.y;
+		_size = (CFTypeRef)(AXValueCreate(kAXValueCGSizeType, (const void *)&_windowSize));					
+		
+		if(AXUIElementSetAttributeValue((AXUIElementRef)_focusedWindow,(CFStringRef)NSAccessibilitySizeAttribute,(CFTypeRef*)_size) != kAXErrorSuccess){
+			NSLog(@"Size cannot be modified");
+		}
+    }
+    _focusedWindow = NULL;
+}
+
 -(IBAction)shiftToLeftHalf:(id)sender{
     NSLog(@"Shifting To Left Half");
 	if([self getWindowParameters]){

@@ -17,9 +17,9 @@
  
  */
 
-#import "ShiftItAppDelegate.h"
+#import "SimpleWindowResizerAppDelegate.h"
 
-@implementation ShiftItAppDelegate
+@implementation SimpleWindowResizerAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	if (!AXAPIEnabled()){
@@ -62,16 +62,17 @@
 
 }
 
-//DO NOT USE YET! THERE IS NO WAY TO TURN THE ICON ON!
 -(void)updateMenuBarIcon{
 	BOOL showIconInMenuBar = [[NSUserDefaults standardUserDefaults] boolForKey:@"shiftItshowMenu"];
 	NSStatusBar * temp = [NSStatusBar systemStatusBar];
 	if(showIconInMenuBar){
 		if(!statusItem){
-			statusItem = [[temp statusItemWithLength:NSVariableStatusItemLength] retain];
-			[statusItem setMenu:statusMenu];
-			[statusItem setTitle:@"Shift"];
+			statusItem = [[temp statusItemWithLength:NSSquareStatusItemLength] retain];
+
+			NSImage *image = [NSImage imageNamed:@"icon.png"];
+			[statusItem setImage:image];
 			[statusItem setHighlightMode:YES];
+			[statusItem setMenu:statusMenu];
 		}
 	}else {
 /*		[temp removeStatusItem:statusItem];

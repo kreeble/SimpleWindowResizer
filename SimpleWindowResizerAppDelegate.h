@@ -20,7 +20,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PrefWindowController.h"
 
-@interface ShiftItAppDelegate : NSObject {
+@interface SimpleWindowResizerAppDelegate : NSObject {
     PrefWindowController * prefController;
     Preferences * _pref;
 	IBOutlet NSMenu *statusMenu;
