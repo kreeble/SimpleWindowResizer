@@ -22,6 +22,7 @@
 
 @interface WindowSizer ()
 
+- (void)disableCursorMode;
 - (void)resizeWindowToCursorLocation:(NSTimer *)timer;
 
 @end
@@ -135,6 +136,46 @@
     return !error;
 }
 
+-(IBAction)shiftToCursorLocation:(id)sender{
+    NSLog(@"-- Shifting to Cursor Location");
+	
+	const NSTimeInterval ResizeUpdateTimeInterval = 0.1;
+	
+	cursorModeFlag = !cursorModeFlag;
+	
+	if (cursorModeFlag) {
+		[self resizeWindowToCursorLocation:nil];	// call it once first to update immediately
+		
+		if (resizeTimer == nil) {
+			resizeTimer = [NSTimer scheduledTimerWithTimeInterval:ResizeUpdateTimeInterval
+												  target:self
+												selector:@selector(resizeWindowToCursorLocation:)
+												userInfo:nil
+												 repeats:YES];
+		}
+		
+		// register mouse click listener
+		mouseClickMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:
+							 (NSLeftMouseDownMask | NSRightMouseDownMask | NSOtherMouseDownMask)
+																  handler:^(NSEvent *incomingEvent) {
+																	  NSLog(@"Mouse click detected, disabling cursor mode");
+																	  [self disableCursorMode];
+																  }];
+	} else {
+		[self disableCursorMode];
+	}
+}
+
+- (void)disableCursorMode {
+	cursorModeFlag = NO;
+	[resizeTimer invalidate];
+	resizeTimer = nil;
+	if (mouseClickMonitor) {
+		[NSEvent removeMonitor:mouseClickMonitor];
+		mouseClickMonitor = nil;
+	}
+}
+
 - (void)resizeWindowToCursorLocation:(NSTimer *)timer {
 	NSLog(@"hello");
 	if([self getWindowParameters]){
@@ -157,31 +198,6 @@
 		}
 	}
 	_focusedWindow = NULL;
-}
-
--(IBAction)shiftToCursorLocation:(id)sender{
-    NSLog(@"-- Shifting to Cursor Location");
-	static BOOL cursorModeFlag = NO;
-	static NSTimer *resizeTimer = nil;
-	
-	const NSTimeInterval ResizeUpdateTimeInterval = 0.1;
-	
-	cursorModeFlag = !cursorModeFlag;
-	
-	if (cursorModeFlag) {
-		[self resizeWindowToCursorLocation:nil];	// call it once first to update immediately
-		
-		if (resizeTimer == nil) {
-			resizeTimer = [NSTimer scheduledTimerWithTimeInterval:ResizeUpdateTimeInterval
-												  target:self
-												selector:@selector(resizeWindowToCursorLocation:)
-												userInfo:nil
-												 repeats:YES];
-		}
-	} else {
-		[resizeTimer invalidate];
-		resizeTimer = nil;
-	}
 }
 
 -(IBAction)shiftToLeftHalf:(id)sender{

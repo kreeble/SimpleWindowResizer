@@ -21,6 +21,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface WindowSizer : NSObject {
+	BOOL cursorModeFlag;
+	NSTimer *resizeTimer;
+	id mouseClickMonitor;
+	
     AXUIElementRef	_systemWideElement;
     CFTypeRef _focusedWindow;
     NSSize _screenSize;
