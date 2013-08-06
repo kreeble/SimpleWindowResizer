@@ -141,7 +141,7 @@ OSStatus winSizer(EventHandlerCallRef nextHandler,EventRef theEvent,void *userDa
     [_userDefaultsValuesDict setObject:center forKey:@"center"];
 	
 	NSDictionary *cursor = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)], HotKeyModifers,
+							[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask+NSShiftKeyMask)], HotKeyModifers,
 							[NSNumber numberWithUnsignedInt:7], HotKeyCodes,
 							nil];
     [_userDefaultsValuesDict setObject:cursor forKey:@"cursor"];
@@ -156,7 +156,7 @@ OSStatus winSizer(EventHandlerCallRef nextHandler,EventRef theEvent,void *userDa
 	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:8 keyCode:124 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask+NSControlKeyMask)]]];
 	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:9 keyCode:8 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)]]];
 	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:10 keyCode:3 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)]]];
-	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:11 keyCode:7 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask)]]];
+	[_hKeyController registerHotKey:[[SIHotKey alloc]initWithIdentifier:11 keyCode:7 modCombo:[NSNumber numberWithUnsignedInt:(NSCommandKeyMask+NSAlternateKeyMask+NSShiftKeyMask)]]];
 	
     [_userDefaultsValuesDict setObject:[NSNumber numberWithBool:YES] forKey:@"shiftItstartLogin"];
     [_userDefaultsValuesDict setObject:[NSNumber numberWithBool:YES] forKey:@"shiftItshowMenu"];
@@ -172,8 +172,7 @@ OSStatus winSizer(EventHandlerCallRef nextHandler,EventRef theEvent,void *userDa
     
     // Set the initial values in the shared user defaults controller
     [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:initialValuesDict];
-	
-    
+
 }
 
 -(void)modifyHotKey:(NSInteger)newKey modiferKeys:(NSInteger)modKeys key:(NSString*)keyCode{
