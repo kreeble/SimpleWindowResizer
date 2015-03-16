@@ -22,23 +22,19 @@
 @implementation SimpleWindowResizerAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	if (!AXAPIEnabled()){
-        int ret = NSRunAlertPanel (@"===========================\nIn OSX 10.9+, the setting is in:\n\- System Preferences\n- Security & Privacy\n- Privacy\n- Accessibility\n\nCheck the box for SimpleWindowResizer to enable it.\n\n===========================\nIn earlier versions of OSX, it is in:\n- System Preferences\n- Accessibility\n\nPress \"Enable access for assistive devices\" and try again.\n\n===========================\nPress OK to open preferences now.", @"", @"OK", @"Cancel",NULL);
-        switch (ret){
-            case NSAlertDefaultReturn:
-                [[NSWorkspace sharedWorkspace] openFile:@"/System/Library/PreferencePanes/Security.prefPane"];
-                //[[NSWorkspace sharedWorkspace] openFile:@"/System/Library/PreferencePanes/UniversalAccessPref.prefPane"];
-				[NSApp terminate:self];
-				return;
-                break;
-            case NSAlertAlternateReturn:
-                [NSApp terminate:self];
-                return;
-                break;
-            default:
-                break;
+    if (!AXAPIEnabled()){
+        if ([self isOsxVersion10_9Plus]) {
+            // In OSX 10.9+, the setting is in: System Preferences -> Security & Privacy -> Privacy -> Accessibility
+            [[NSWorkspace sharedWorkspace] openFile:@"/System/Library/PreferencePanes/Security.prefPane"];
+        } else {
+            // In earlier versions of OSX, it is in: System Preferences -> Accessibility -> "Enable access for assistive devices"
+            [[NSWorkspace sharedWorkspace] openFile:@"/System/Library/PreferencePanes/UniversalAccessPref.prefPane"];
         }
-    }    
+    }
+}
+
+- (BOOL)isOsxVersion10_9Plus {
+    return (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_9);
 }
 
 -(id)init{
