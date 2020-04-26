@@ -177,7 +177,6 @@
 }
 
 - (void)resizeWindowToCursorLocation:(NSTimer *)timer {
-	NSLog(@"hello");
 	if([self getWindowParameters]){
 		[self getVisibleScreenParams];
 		
