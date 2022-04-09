@@ -127,7 +127,9 @@
 		NSLog(@"Problem with App");
 	}
     if(!error){
-		_menuBarHeight = GetMBarHeight();
+        // macOS mojave doesn't seem to have GetMBarHeight() anymore
+        // 25 should work for intel macs, but not for notch silicon macs
+        _menuBarHeight = 25;
         [self chooseScreen];
         NSLog(@"Get Window Parameter Success");
     }else {

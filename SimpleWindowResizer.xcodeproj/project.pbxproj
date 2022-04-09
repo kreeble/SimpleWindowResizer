@@ -10,13 +10,11 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* SimpleWindowResizerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* SimpleWindowResizerAppDelegate.m */; };
 		3D2678C61AB7502100FD8D1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D2678C51AB7502100FD8D1C /* Images.xcassets */; };
-		3DE106CB245507CE005C3D21 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2708222117FCF9400C0A04C /* Sparkle.framework */; };
 		4B5170ED157323FD00E49BE5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B5170EC157323FD00E49BE5 /* icon.png */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		F2520B641133874D00DB826F /* PrefWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2520B631133874D00DB826F /* PrefWindowController.m */; };
-		F2708277117FE51100C0A04C /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F2708222117FCF9400C0A04C /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F2C54EA31128AADB00E7DAC5 /* hKController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C54EA21128AADB00E7DAC5 /* hKController.m */; };
 		F2DC1A321133829D009BDCA5 /* PrefWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2DC1A311133829D009BDCA5 /* PrefWindow.xib */; };
 		F2DC61251127ACDE000E1A5B /* WindowSizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DC61241127ACDE000E1A5B /* WindowSizer.m */; };
@@ -24,19 +22,6 @@
 		F2DC61991127C15F000E1A5B /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DC61981127C15F000E1A5B /* Preferences.m */; };
 		F2DC61EF1127C862000E1A5B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC61EE1127C862000E1A5B /* Carbon.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F270823F117FCFD600C0A04C /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F2708277117FE51100C0A04C /* Sparkle.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -53,7 +38,6 @@
 		8D1107320486CEB800E47090 /* SimpleWindowResizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWindowResizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2520B621133874D00DB826F /* PrefWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefWindowController.h; sourceTree = "<group>"; };
 		F2520B631133874D00DB826F /* PrefWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefWindowController.m; sourceTree = "<group>"; };
-		F2708222117FCF9400C0A04C /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		F2C54EA11128AADB00E7DAC5 /* hKController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hKController.h; sourceTree = "<group>"; };
 		F2C54EA21128AADB00E7DAC5 /* hKController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hKController.m; sourceTree = "<group>"; };
 		F2DC1A311133829D009BDCA5 /* PrefWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefWindow.xib; sourceTree = "<group>"; };
@@ -71,7 +55,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DE106CB245507CE005C3D21 /* Sparkle.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				F2DC61EF1127C862000E1A5B /* Carbon.framework in Frameworks */,
 			);
@@ -96,7 +79,6 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F2708222117FCF9400C0A04C /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -194,7 +176,6 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				F270823F117FCFD600C0A04C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -295,7 +276,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Downloads/BWToolkit\"",
-					"\"$(SRCROOT)/../../../Downloads/Sparkle 1.5b6\"",
 					"\"$(SRCROOT)/build/Release\"",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
